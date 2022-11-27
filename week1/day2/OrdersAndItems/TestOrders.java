@@ -44,8 +44,9 @@ public class TestOrders {
         order2.ready = true;
 
         order4.items.add(item2);
+        order4.total += item2.price;
         order4.items.add(item2);
-        order4.total += item2.price * 2;
+        order4.total += item2.price;
     
         // Application Simulations
         // Use this example code to test various orders' updates

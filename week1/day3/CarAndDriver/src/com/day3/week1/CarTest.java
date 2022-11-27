@@ -6,11 +6,11 @@ public class CarTest {
 		Driver driver1 = new Driver();
 		driver1.driving();
 		driver1.driving();
+		driver1.refuel();
 		driver1.driving();
+		driver1.refuel();
 		driver1.driving();
 		driver1.booster();
-		driver1.refuel();
-		driver1.refuel();
 		driver1.refuel();
 		System.out.println(driver1.remainingGas());
 	}

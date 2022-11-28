@@ -14,5 +14,4 @@ public class BatTest {
 		System.out.println("Bats total energy: " + bat1.displayEnergy());
 
 	}
-
 }

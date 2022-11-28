@@ -26,4 +26,21 @@ class PuzzleJava {
         }
         return alphabet[randNum.nextInt(26)];
     }
+
+    String generatePassword(){
+        String password = "";
+        for(int i = 0; i < 9; i++){
+            password += randletter();
+        }
+        return password;
+    }
+
+    
+    String getNewPasswordSet(int length){
+        String password = "";
+        for(int i = 0; i <= length; i++){
+            password += randletter();
+        }
+        return password;
+    }
 }

@@ -12,5 +12,11 @@ public class TestPuzzleJava {
 		//..
         String randletter = generator.randletter();
         System.out.println(randletter);
+
+        String randpassword = generator.generatePassword();
+        System.out.println(randpassword);
+        
+        String getNewPasswordSet = generator.getNewPasswordSet(19);
+        System.out.println(getNewPasswordSet);
 	}
 }

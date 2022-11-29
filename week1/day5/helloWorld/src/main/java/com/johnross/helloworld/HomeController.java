@@ -1,5 +1,6 @@
 package com.johnross.helloworld;
-import org.springframework.ui.Model;	
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,13 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	
 	@RequestMapping("/")
-	public String index(Model model) {	
-			model.addAttribute("name", "John");
+	public String index(HttpSession session) {	
+		session.setAttribute("name", "John");
 		return "hello.jsp";
 	}
-	@RequestMapping("/hello")
-	public String hello() {
-		return "hello World";
+	@RequestMapping("/welcome")
+	public String hello(HttpSession session) {
+		String userName = (String) session.getAttribute("name");
+		System.out.println("this name is " + userName);
+		return "welcome.jsp";
 	}
 	@RequestMapping("/goodbye")
 	public String goodbye() {

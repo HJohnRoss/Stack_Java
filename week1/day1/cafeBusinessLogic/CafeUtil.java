@@ -5,7 +5,7 @@ class CafeUtil {
         for(int i = 0; i < 11; i++) {
             num += i;
         }
-    return num;
+        return num;
     }
 
     double getOrderTotal(double[] prices) {

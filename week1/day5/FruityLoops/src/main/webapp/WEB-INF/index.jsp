@@ -16,8 +16,8 @@
 		</tr>
 		<c:forEach var="oneFruit" items="${fruits }">
 		<tr>
-			<th class="border-top"><c:out value="${oneFruit.name}"></c:out></th>
-			<th class="border-top"><c:out value="${oneFruit.price}"></c:out></th>
+			<td class="border-top"><c:out value="${oneFruit.name}"></c:out></td>
+			<td class="border-top"><c:out value="${oneFruit.price}"></c:out></td>
 		</tr>
 		</c:forEach>
 	</table>

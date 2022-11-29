@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+*{
+	margin:0;
+	padding:0;
+}
+
+.border{
+	border:10px solid pink;
+}
+
+.border-top{
+	border-top:2px solid pink;
+}

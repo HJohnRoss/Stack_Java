@@ -11,7 +11,6 @@ public class HomeController {
 	public String index() {
 		return "Hello User";
 	}
-	
 	@RequestMapping("/hello")
 	public String hello() {
 		return "hello World";

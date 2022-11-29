@@ -1,15 +1,16 @@
 package com.johnross.helloworld;
+import org.springframework.ui.Model;	
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-//@RequestMapping("greeting")
+@Controller
 public class HomeController {
 	
 	@RequestMapping("/")
-	public String index() {
-		return "Hello User";
+	public String index(Model model) {	
+			model.addAttribute("name", "John");
+		return "hello.jsp";
 	}
 	@RequestMapping("/hello")
 	public String hello() {

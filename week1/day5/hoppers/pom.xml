@@ -8,11 +8,11 @@
 		<version>2.7.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.johnross.helloworld</groupId>
-	<artifactId>helloWorld</artifactId>
+	<groupId>com.johnross.daikichiroutes</groupId>
+	<artifactId>hoppers</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>helloWorld</name>
+	<name>hoppers</name>
 	<description>First Spring Project!</description>
 	<properties>
 		<java.version>17</java.version>

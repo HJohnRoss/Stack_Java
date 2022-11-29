@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+
+*{
+	margin:0;
+	padding:0;
+}
+
+.text-green{
+	color:green;
+}
+
+.text-blue{
+	color:blue;
+}
+
+.d-flex{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	gap:20px;
+}

@@ -9,6 +9,7 @@
 <title>Welcome Page</title>
 </head>
 <body>
+	<p><c:out value="${error }"/></p>
 	<h1>Welcome: <c:out value="${name }"></c:out></h1>
 </body>
 </html>

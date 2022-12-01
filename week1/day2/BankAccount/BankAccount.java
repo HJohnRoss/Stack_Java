@@ -2,37 +2,41 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 class BankAccount {
-    public double checkingBalance;
-    public double savingsBalance;
-    public static int totalAccounts = 0;
-    public static double bankTotal = 0;
+    static double checkingBalance;
+    static double savingsBalance;
+    static static int totalAccounts = 0;
+    static static double bankTotal = 0;
 
     public BankAccount(double checkingBalanceParam, double savingsBalanceParam) {
-        checkingBalance = checkingBalanceParam;
-        savingsBalance = savingsBalanceParam;
-        totalAccounts++;
-        bankTotal += checkingBalance + savingsBalance;
+        this.checkingBalance = checkingBalanceParam;
+        this.savingsBalance = savingsBalanceParam;
+        this.totalAccounts++;
+        this.bankTotal += checkingBalance + savingsBalance;
     }
 
-    public void addCheckingBal(double addCheckingBal) {
-        checkingBalance += addCheckingBal;
-        bankTotal += addCheckingBal;
+    public double addCheckingBal(double addCheckingBal) {
+        this.checkingBalance += addCheckingBal;
+        this.bankTotal += addCheckingBal;
+        return this.checkingBalance;
     }
 
-    public void addSavingsBal(double addSavingsBal) {
-        savingsBalance += addSavingsBal;
-        bankTotal += addSavingsBal;
+    public double addSavingsBal(double addSavingsBal) {
+        this.savingsBalance += addSavingsBal;
+        this.bankTotal += addSavingsBal;
+        return this.savingsBalance;
     }
 
-    public void withdrawBal(double withdrawAmnt) {
+    public double withdrawBal(double withdrawAmnt) {
         if (checkingBalance - withdrawAmnt > -1) {
-            checkingBalance -= withdrawAmnt;
-            bankTotal -= withdrawAmnt;
+            this.checkingBalance -= withdrawAmnt;
+            this.bankTotal -= withdrawAmnt;
         }
+        return this.checkingBalance;
+        
     }
 
     public double showAllBal() {
-        double accBal = checkingBalance + savingsBalance;
+        double accBal = this.checkingBalance + self.savingsBalance;
         return accBal;
     }
 }

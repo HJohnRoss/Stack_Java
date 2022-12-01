@@ -9,7 +9,6 @@ public class AdminUser extends User implements HIPAACompliantAdmin, HIPAAComplia
     public AdminUser(int idParam, String role) {
 		super(idParam);
 		this.role = role;
-		// TODO Auto-generated constructor stub
 	}
 	// Inside class:
     private Integer employeeID;
@@ -21,6 +20,7 @@ public class AdminUser extends User implements HIPAACompliantAdmin, HIPAAComplia
 	public boolean assignPin(int pin) {
     	int lenPin = String.valueOf(pin).length();
     	if(lenPin > 5) {
+    		this.pin = pin;
     		return true;
     	} else {
     		return false;

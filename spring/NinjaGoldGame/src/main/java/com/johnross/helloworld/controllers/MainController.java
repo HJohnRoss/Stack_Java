@@ -32,7 +32,7 @@ public class MainController {
 							) {
 		SimpleDateFormat format = new SimpleDateFormat("MMM d Y h:mm a");
 		ArrayList<String> actions = new ArrayList<String>();
-		
+
 		int totalGold = 0;
 		if(session.getAttribute("total") == null) {			
 			session.setAttribute("total", 0);

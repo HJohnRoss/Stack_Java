@@ -10,7 +10,7 @@ public class Test {
         
         
         // Physician Implementation Tests
-        System.out.println("\n==</span>======== Physician Tests ==========\n");
+        System.out.println("\n========== Physician Tests ==========\n");
         String pinTest1 = doctor10.assignPin(42)? "FAIL" : "PASS";
         System.out.printf("Physician pin assign test 1: %s\n", pinTest1);
         

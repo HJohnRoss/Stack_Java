@@ -1,6 +1,5 @@
 package com.stack_java.mvc.controllers;
 
-import java.sql.Array;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,18 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 	
+	@GetMapping("/")
+	public String home(
+			Model model
+			) {
+		
+		List<Book> allBooks = bookService.allBooks();
+		
+		model.addAttribute("allBooks", allBooks);
+		
+		return "home.jsp";
+	}
+	
 	@GetMapping("/books/{bookId}")
 	public String index(
 			Model model,
@@ -27,10 +38,8 @@ public class BookController {
 		System.out.println(bookId);
 		Book book = bookService.findBook(bookId);
 		
-		List<Book> books = bookService.allBooks();
 		
 		model.addAttribute("book", book);
-		model.addAttribute("books", books);
 		
 		return "index.jsp";
 	}

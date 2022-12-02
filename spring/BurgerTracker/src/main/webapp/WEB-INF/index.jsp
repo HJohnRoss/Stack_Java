@@ -1,8 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- c:out ; c:forEach etc. --> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- Formatting (dates) --> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!-- form:form -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!-- for rendering errors on PUT routes -->
 <%@ page isErrorPage="true" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +34,7 @@
 			<c:forEach var="oneBurger" items="${allBurgers }">
 			
 				<tr>
-					<td><c:out value="${oneBurger.burgerName }"/></td>
+					<td><a href="/burger/edit/${oneBurger.id}"><c:out value="${oneBurger.burgerName }"/></a></td>
 					<td><c:out value="${oneBurger.restaurantName }"/></td>
 					<td><c:out value="${oneBurger.rating }"/></td>
 				</tr>
@@ -42,7 +47,6 @@
 		
 		<h2>Add a Burger:</h2>
 		<form:form action="/burger/create" method="post" modelAttribute="burger">
-		
 		
 		<div>
 			<form:label path="burgerName">Burger Name</form:label>

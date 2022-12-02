@@ -52,7 +52,13 @@ public class Burger {
 	public Burger() {
 	}
 	
-	public Burger(String burgerName, String restaurantName, int rating, String note) {
+	public Burger(
+			String burgerName, 
+			String restaurantName, 
+			int rating, 
+			String note
+			) {
+		
 		this.burgerName = burgerName;
 		this.restaurantName = restaurantName;
 		this.rating = rating;

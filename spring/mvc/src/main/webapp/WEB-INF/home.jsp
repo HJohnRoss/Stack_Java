@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>All Books</h1>
+	<a href="/book/create">add a book!</a>
 	<table>
 		<tr>
 			<th>Id</th>

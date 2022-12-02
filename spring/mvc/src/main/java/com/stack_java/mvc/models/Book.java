@@ -24,18 +24,23 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @NotNull
-    @Size(min = 5, max = 200)
+    @Size(min = 5, max = 200, message="Must be at least 5 characters")
     private String title;
+    
     @NotNull
-    @Size(min = 5, max = 200)
+    @Size(min = 5, max = 200, message="Must be at least 5 characters")
     private String description;
+    
     @NotNull
-    @Size(min = 3, max = 40)
+    @Size(min = 3, max = 40, message="Must be at least 3 characters")
     private String language;
-    @NotNull
-    @Min(100)
+    
+    @NotNull(message="Must not be blank")
+    @Min(value=100, message="Must be greater than 100 pages")
     private Integer numberOfPages;
+    
     // This will not allow the createdAt column to be updated after creation
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")

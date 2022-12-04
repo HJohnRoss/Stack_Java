@@ -35,7 +35,7 @@
 					<td><c:out value="${oneLanguage.creator }"></c:out></td>
 					<td><c:out value="${oneLanguage.version }"></c:out></td>
 					<td class="d-flex gap-3">
-						<form action="/language/delete/${id}" method="post">
+						<form action="/language/delete/${oneLanguage.id}" method="post">
 							<input type="hidden" name="_method" value="delete">
 							<input type="submit" value="Delete" class="btn btn-danger">
 						</form>

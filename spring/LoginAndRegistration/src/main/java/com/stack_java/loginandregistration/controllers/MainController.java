@@ -48,10 +48,11 @@ public class MainController {
 	}
 
 	@PostMapping("/login")
-	public String login(@Valid @ModelAttribute("newLogin") UserLogin newLogin, BindingResult result, Model model,
+	public String login(@Valid @ModelAttribute("newLogin") UserLogin newLogin, BindingResult results, Model model,
 			HttpSession session) {
-		User user = userService.login(newLogin, result);
-		if (result.hasErrors()) {
+		User user = userService.login(newLogin, results);
+		if (results.hasErrors()) {
+			model.addAttribute("newUser", new User());
 			return "index.jsp";
 		}
 		session.setAttribute("userId", user.getId());
@@ -61,7 +62,7 @@ public class MainController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-
+		
 		return "redirect:/";
 	}
 }

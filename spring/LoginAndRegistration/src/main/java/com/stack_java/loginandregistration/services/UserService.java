@@ -34,19 +34,18 @@ public class UserService {
 	}
 
 	public User login(UserLogin newLoginObject, BindingResult result) {
-		if (userRepository.findByEmail(newLoginObject.getEmail()) == null) {
+		Optional<User> userObject = userRepository.findByEmail(newLoginObject.getEmail());
+		if (!userRepository.findByEmail(newLoginObject.getEmail()).isPresent()) {
+			result.rejectValue("email", "Matches", "Invalid username/password");
+		}
+		if (userObject.isPresent()) {
+			if (!BCrypt.checkpw(newLoginObject.getPassword(), userObject.get().getPassword())) {
+				result.rejectValue("password", "Matches", "Invalid username/password");
+			}
+		}
+		if (result.hasErrors()) {
 			return null;
 		}
-		Optional<User> userObject = userRepository.findByEmail(newLoginObject.getEmail());
-		User user = userObject.get();
-		if (userObject.isPresent()) {
-			if (!BCrypt.checkpw(newLoginObject.getPassword(), user.getPassword())) {
-				return null;
-			}
-			if (result.hasErrors()) {
-				return null;
-			}
-		}
-		return user;
+		return userObject.get();
 	}
 }

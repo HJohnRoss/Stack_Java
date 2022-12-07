@@ -27,24 +27,24 @@
 		<h1>Register</h1>
 		<div class="d-flex justify-content-between">
 			<form:form action="/register" method="post" modelAttribute="newUser">
+					<form:errors path="userName" class="text-danger" />
 				<div>
 					<form:label path="userName">User Name</form:label>
-					<form:errors path="userName" class="text-danger" />
 					<form:input path="userName" type="text" />
 				</div>
+					<form:errors path="email" class="text-danger" />
 				<div>
 					<form:label path="email">Email</form:label>
-					<form:errors path="email" class="text-danger" />
 					<form:input path="email" type="text" />
 				</div>
+					<form:errors path="password" class="text-danger" />
 				<div>
 					<form:label path="password">Password</form:label>
-					<form:errors path="password" class="text-danger" />
 					<form:input path="password" type="password" />
 				</div>
+					<form:errors path="confirm" class="text-danger" />
 				<div>
 					<form:label path="confirm">Confirm Password</form:label>
-					<form:errors path="confirm" class="text-danger" />
 					<form:input path="confirm" type="password" />
 				</div>
 				<button class="btn btn-primary">Submit</button>
@@ -53,14 +53,14 @@
 			<div>
 				<form:form action="/login" method="post" modelAttribute="newLogin">
 					<h1>Login</h1>
+						<form:errors path="email" class="text-danger" />
 					<div>
 						<form:label path="email">Email</form:label>
-						<form:errors path="email" class="text-danger" />
 						<form:input path="email" type="text" />
 					</div>
+						<form:errors path="password" class="text-danger" />
 					<div>
 						<form:label path="password">Password</form:label>
-						<form:errors path="password" />
 						<form:input path="password" type="password" />
 					</div>
 					<button class="btn btn-primary">Submit</button>

@@ -35,8 +35,9 @@ public class User {
 	@Size(min = 8, message = "Confirm Password must be at least 8 characters long!")
 	private String confirm;
 
-	public User() {
-	}
+	public User() {}
+
+
 
 	public Long getId() {
 		return id;

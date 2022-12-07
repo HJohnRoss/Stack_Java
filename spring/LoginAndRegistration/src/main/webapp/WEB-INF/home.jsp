@@ -20,7 +20,14 @@
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>Welcome</h1>
-	<a href="/logout">Log out</a>
+	<div class="container">
+		<h1 class="text-warning">
+			Welcome,
+			<c:out value="${userName }"></c:out>
+		</h1>
+		<h5>This is your Dashboard. Nothing to see here yet.</h5>
+		<a href="/logout">Log out</a>
+	</div>
+
 </body>
 </html>

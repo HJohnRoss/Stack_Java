@@ -29,9 +29,9 @@ public class MainController {
 	}
 
 	@GetMapping("/home")
-	public String home(
-
-	) {
+	public String home(HttpSession session, Model model) {
+		model.addAttribute("oneUser", userService.oneUser(session.getAttribute("userId")));
+		model.addAttribute("userName", session.getAttribute("userName"));
 		return "home.jsp";
 	}
 
@@ -43,7 +43,8 @@ public class MainController {
 			model.addAttribute("newLogin", new UserLogin());
 			return "index.jsp";
 		}
-		session.setAttribute("userId", user);
+		session.setAttribute("userId", user.getId());
+		session.setAttribute("userName", user.getUserName());
 		return "redirect:/home";
 	}
 
@@ -56,6 +57,7 @@ public class MainController {
 			return "index.jsp";
 		}
 		session.setAttribute("userId", user.getId());
+		session.setAttribute("userName", user.getUserName());
 		return "redirect:/home";
 	}
 

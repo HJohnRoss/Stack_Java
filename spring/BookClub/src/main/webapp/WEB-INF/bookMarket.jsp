@@ -42,13 +42,17 @@
 					<td><c:out value="${oneBook.author }"></c:out></td>
 					<td><c:out value="${oneBook.user.name }"></c:out></td>
 					<td>
+					<c:if test="${oneBook.borrower == null && oneBook.user.id != userId }">
 						<a href="/borrow/add/${oneBook.id }">borrow</a>
+					</c:if>
 						
-						<a href="/bookmarket/edit/${oneBook.id }">edit</a>
-						<form action="/book/delete/${oneBook.id }" method="post">
-					   		<input type="hidden" name="_method" value="delete">
-			 				<input type="submit" value="Delete">
-						</form>
+						<c:if test="${oneBook.user.id == userId }">
+							<a href="/book/edit/${oneBook.id }">edit</a>
+							<form action="/book/delete/${oneBook.id }" method="post">
+						   		<input type="hidden" name="_method" value="delete">
+				 				<input type="submit" value="Delete">
+							</form>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>
@@ -62,8 +66,14 @@
 				<th>Owner</th>
 				<th>Actions</th>
 			</tr>
-			<c:forEach var="oneBorrow" items="${oneUser.borrows } }">
-				sad
+			<c:forEach var="oneBook" items="${oneUser.borrows }">
+				<tr>
+					<td><c:out value="${oneBook.id }"></c:out></td>
+					<td><c:out value="${oneBook.title }"></c:out></td>
+					<td><c:out value="${oneBook.user.name }"></c:out></td>
+					<td><c:out value="${oneBook.author }"></c:out></td>
+					<td><a href="/borrow/delete/${oneBook.id }">Unborrow</a></td>
+				</tr>
 			</c:forEach>
 		</table>
 	</div>

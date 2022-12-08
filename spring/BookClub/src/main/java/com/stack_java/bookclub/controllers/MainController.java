@@ -122,18 +122,18 @@ public class MainController {
 //	edit book
 	@GetMapping("/book/edit/{id}")
 	public String editBookShow(@PathVariable("id") Long id, Model model, HttpSession session) {
-		if (session.getAttribute("userId") != id) {
+		if (!session.getAttribute("userId").equals(bookService.getBook(id).getUser().getId())) {
 			return "redirect:/";
 		}
 		model.addAttribute("oneBook", bookService.getBook(id));
 		return "editBook.jsp";
 	}
-	
+
 //	Make sure to use PutMapping for edits
 	@PutMapping("/book/edit/success")
 	public String editBook(@Valid @ModelAttribute("oneBook") Book book, BindingResult result, Model model,
 			HttpSession session) {
-		if (session.getAttribute("userId") != book.getUser().getId()) {
+		if (!session.getAttribute("userId").equals(book.getUser().getId())) {
 			return "redirect:/dashboard";
 		}
 		if (result.hasErrors()) {
@@ -152,7 +152,7 @@ public class MainController {
 		bookService.deleteBook(id);
 		return "redirect:/dashboard";
 	}
-	
+
 //	wrong way
 //	@RequestMapping("/book/delete/{id}")
 //    public String deleteBook(@PathVariable("id") Long id, HttpSession session) {
@@ -162,7 +162,7 @@ public class MainController {
 //        bookService.deleteBook(id);
 //        return "redirect:/dashboard";
 //    }
-	
+
 //	book broker dashboard
 	@GetMapping("/bookmarket")
 	public String bookMarket(HttpSession session, Model model) {
@@ -175,13 +175,22 @@ public class MainController {
 		model.addAttribute("oneUser", userService.oneUser(session.getAttribute("userId")));
 		return "bookMarket.jsp";
 	}
-	
+
 	@GetMapping("/borrow/add/{id}")
 	public String borrow(@PathVariable("id") Long id, HttpSession session) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/";
 		}
-		
+		bookService.addBorrower(bookService.getBook(id), userService.oneUser(session.getAttribute("userId")));
+		return "redirect:/bookmarket";
+	}
+
+	@GetMapping("/borrow/delete/{id}")
+	public String delBorrow(@PathVariable("id") Long id, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/";
+		}
+		bookService.delBorrower(bookService.getBook(id), userService.oneUser(session.getAttribute("userId")));
 		return "redirect:/bookmarket";
 	}
 }

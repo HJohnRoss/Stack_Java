@@ -40,14 +40,18 @@
 			<p><c:out value="${oneBook.thought }"></c:out></p>
 		</div>
 		<c:choose>
+			<!-- if -->
 			<c:when test="${oneBook.user.id == userId }">
-				<a href="/books/edit/${oneBook.id }">edit</a>
-				<a href="/books/delete/${oneBook.id }">test</a> <!-- Can also use an anchor tag? -->
-				<form action="/books/delete/${oneBook.id }" method="post">
-					<input type="hidden" name="_method" value="delete">
-					<input type="submit" value="Delete" class="btn btn-danger">
+				<a href="/book/edit/${oneBook.id }">edit</a>
+				<form action="/book/delete/${oneBook.id }" method="post">
+				   <input type="hidden" name="_method" value="delete">
+ 				   <input type="submit" value="Delete">
 				</form>
 			</c:when>
+			<!-- else -->
+			<c:otherwise>
+			
+			</c:otherwise>
 		</c:choose>
 	</div>
 </body>

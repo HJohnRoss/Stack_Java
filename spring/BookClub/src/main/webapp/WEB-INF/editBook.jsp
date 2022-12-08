@@ -24,6 +24,7 @@
 			<a href="/dashboard">dashboard</a>
 		</div>
 		<form:form action="/book/edit/success" method="post" modelAttribute="oneBook">
+			<input type="hidden" name="_method" value="put">
 			<form:input path="id" type="hidden" value="${oneBook.id }"></form:input>
 			<form:input path="user" type="hidden" value="${oneBook.user.id }"></form:input>
 			<form:errors path="title" class="text-danger"></form:errors>

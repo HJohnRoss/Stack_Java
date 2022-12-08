@@ -20,28 +20,50 @@
 <body>
 	<div class="container">
 		<div class="d-flex justify-content-between">
-			<h1>Welcome, <c:out value="${userName}"/></h1>
-			<a href="/bookmarket">Book Market</a>
-			<a href="/logout">logout</a>
+			<h4>Hello, <c:out value="${userName}"></c:out>, Welcome to..</h4>
+			<a href="/dashboard">dashboard</a>
 		</div>
-		<div class="d-flex justify-content-between">
-			<h4>Books from everyone's shelves:</h4>
-			<a href="/book/create">+ Add a book to my shelf!</a>
+		<div>
+			<h1>The Book Broker!</h1>
+			<h4>Available Books to Borrow</h4>
 		</div>
 		<table class="table table-dark">
 			<tr>
-				<th>ID</th>
+				<th>Id</th>
 				<th>Title</th>
 				<th>Author Name</th>
-				<th>Posted by</th>
+				<th>Owner</th>
+				<th>Actions</th>
 			</tr>
-			<c:forEach var="oneBook" items="${allBooks }">
+			<c:forEach var="oneBook" items="${allBooks }">		
 				<tr>
 					<td><c:out value="${oneBook.id }"></c:out></td>
-					<td><a href="/book/show/${oneBook.id }"><c:out value="${oneBook.title }"></a></c:out></td>
+					<td><c:out value="${oneBook.title }"></c:out></td>
 					<td><c:out value="${oneBook.author }"></c:out></td>
 					<td><c:out value="${oneBook.user.name }"></c:out></td>
+					<td>
+						<a href="/borrow/add/${oneBook.id }">borrow</a>
+						
+						<a href="/bookmarket/edit/${oneBook.id }">edit</a>
+						<form action="/book/delete/${oneBook.id }" method="post">
+					   		<input type="hidden" name="_method" value="delete">
+			 				<input type="submit" value="Delete">
+						</form>
+					</td>
 				</tr>
+			</c:forEach>
+		</table>
+		<h4>Books I'm Borrowing</h4>
+		<table class="table table-dark">
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Author Name</th>
+				<th>Owner</th>
+				<th>Actions</th>
+			</tr>
+			<c:forEach var="oneBorrow" items="${oneUser.borrows } }">
+				sad
 			</c:forEach>
 		</table>
 	</div>

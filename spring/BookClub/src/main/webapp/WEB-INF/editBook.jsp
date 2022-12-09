@@ -25,22 +25,23 @@
 		</div>
 		<form:form action="/book/edit/success" method="post" modelAttribute="oneBook">
 			<input type="hidden" name="_method" value="put">
-			<form:input path="id" type="hidden" value="${oneBook.id }"></form:input>
-			<form:input path="user" type="hidden" value="${oneBook.user.id }"></form:input>
+			<form:input path="id" type="hidden"></form:input>
+			<form:input path="user" type="hidden"></form:input>
+			<form:input type="hidden" name="borrower" path="borrower"/>
 			<form:errors path="title" class="text-danger"></form:errors>
 			<div>
 				<form:label path="title">Title:</form:label>
-				<form:input path="title" type="text" value="${oneBook.title }"></form:input>
+				<form:input path="title" type="text"></form:input>
 			</div>
 			<form:errors path="author" class="text-danger"></form:errors>
 			<div>
 				<form:label path="author">Author</form:label>
-				<form:input path="author" type="text" value="${oneBook.author }"></form:input>
+				<form:input path="author" type="text"></form:input>
 			</div>
 			<form:errors path="thought" class="text-danger"></form:errors>
 			<div>
 				<form:label path="thought">My thoughts</form:label>
-				<form:textarea path="thought" value="${oneBook.thought }"></form:textarea>
+				<form:textarea path="thought"></form:textarea>
 			</div>
 			<button class="btn btn-primary">Submit</button>
 		</form:form>

@@ -35,7 +35,7 @@
 				<th>Owner</th>
 				<th>Actions</th>
 			</tr>
-			<c:forEach var="oneBook" items="${allBooks }">		
+			<c:forEach var="oneBook" items="${allBooks }">
 				<tr>
 					<td><c:out value="${oneBook.id }"></c:out></td>
 					<td><c:out value="${oneBook.title }"></c:out></td>

@@ -30,6 +30,7 @@
 			</ul>
 		</div>
 		<div>
+			<c:if test="${someProducts != [] }">
 			<h3>Add Product:</h3>
 			<form action="/product/add/${oneCategory.id}" method="post">
 				<select name="product">
@@ -39,6 +40,7 @@
 				</select>
 				<button class="btn btn-primary">Submit</button>
 			</form>
+			</c:if>
 		</div>
 	</div>
 </body>

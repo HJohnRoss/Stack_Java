@@ -31,14 +31,16 @@
 			</ul>
 		</div>
 		
-		<form action="/category/add/${oneProduct.id }" method="post">
-			<select name="categoryId" id="">
-				<c:forEach var="oneCategory" items="${someCategories }">
-					<option value="${oneCategory.id }"><c:out value="${oneCategory.name }"></c:out></option>
-				</c:forEach>
-			</select>
-			<button>Submit</button>
-		</form>
+		<c:if test="${someCategories != [] }">
+			<form action="/category/add/${oneProduct.id }" method="post">
+				<select name="categoryId" id="">
+					<c:forEach var="oneCategory" items="${someCategories }">
+						<option value="${oneCategory.id }"><c:out value="${oneCategory.name }"></c:out></option>
+					</c:forEach>
+				</select>
+				<button>Submit</button>
+			</form>
+		</c:if>
 	</div>
 </body>
 </html>

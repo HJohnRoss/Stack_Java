@@ -13,6 +13,6 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 	List<Category> findAll();
 	
 //	List<Category> findAllProducts(Product product);
-//	
+	
 	List<Category> findByProductsNotContains(Product product);
 }

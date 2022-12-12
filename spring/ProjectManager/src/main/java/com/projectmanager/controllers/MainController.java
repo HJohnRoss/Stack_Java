@@ -192,15 +192,15 @@ public class MainController {
 		return "tasks.jsp";
 	}
 	
-	@PostMapping("/project/{id}/tasks/success")
-	public String createTask(@Valid @ModelAttribute("task") Task task, BindingResult result, @PathVariable("id") Long projectId, HttpSession session, Model model) {
+	@PostMapping("/project/{projectId}/tasks/success")
+	public String createTask(@Valid @ModelAttribute("task") Task task, BindingResult result, @PathVariable("projectId") Long projectId, HttpSession session, Model model) {
 		
 		if(session.getAttribute("userId") == null) return "redirect:/";
 		
 		if(result.hasErrors()) {
 			model.addAttribute("oneProject", projectService.getOne(projectId));
 			model.addAttribute("task", task);
-			return "task.jsp";
+			return "tasks.jsp";
 		}
 		Task newTask = new Task(task.getName()); // why do i need this
 		taskService.createTask(newTask, projectId, session.getAttribute("userId"));

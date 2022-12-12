@@ -22,10 +22,14 @@ public class TaskService {
 	@Autowired UserRepository userRepository;
 	
 	public void createTask(Task task, Long projectId, Object userId){
-		Project project = projectRepository.findById((Long) projectId).get();
+		Project project = projectRepository.findById(projectId).get();
 		User user = userRepository.findById((Long) userId).get();
 		task.setProject(project);
 		task.setCreator(user);
+		taskRepository.save(task);
+	}
+	
+	public void createTask(Task task) {
 		taskRepository.save(task);
 	}
 }

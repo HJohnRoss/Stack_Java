@@ -33,6 +33,7 @@ public class StudentService {
 		return optional.get();
 	}
 
+//	============================ BLACK BELT ============================
 	public Student addClass(Long studentId, Long classId) {
 		Student student = studentRepository.findById(studentId).get();
 		Clas clas = classRepository.findById(classId).get();

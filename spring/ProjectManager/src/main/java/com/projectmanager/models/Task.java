@@ -1,4 +1,4 @@
-package com.stack_java.bookclub.models;
+package com.projectmanager.models;
 
 import java.util.Date;
 
@@ -13,34 +13,33 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="books")
-public class Book {
-	
+@Table(name="tasks")
+public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message = "Title is required")
-	private String title;
-	
-	@NotEmpty(message = "Author is required")
-	private String author;
-	
-	@NotEmpty(message = "Your thoughts are required")
-	private String thought;
+	@Size(min=3, message="Name must be at least 3 characters long")
+	private String name;
 	
 	@Column(updatable=false)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
 	private Date updatedAt;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="project_id")
+	private Project project;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
-	private User user;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="borrower_id")
-	private User borrower;
+	@JoinColumn(name="task_id")
+	private User creator;
+	
 	
     @PrePersist
     protected void onCreate(){
@@ -50,56 +49,57 @@ public class Book {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
-    
-    public Book() {}
-    
-    
+	
+	public Task() {}
+
+	public Task(String name) { // why do i need this
+		this.name = name;
+	}
+	
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getTitle() {
-		return title;
+
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public String getThought() {
-		return thought;
-	}
-	public void setThought(String thought) {
-		this.thought = thought;
-	}
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
+
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
+
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	public User getUser() {
-		return user;
+
+	public Project getProject() {
+		return project;
 	}
-	public void setUser(User user) {
-		this.user = user;
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
-	public User getBorrower() {
-		return borrower;
+	public User getCreator() {
+		return creator;
 	}
-	public void setBorrower(User borrower) {
-		this.borrower = borrower;
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
+	
 }

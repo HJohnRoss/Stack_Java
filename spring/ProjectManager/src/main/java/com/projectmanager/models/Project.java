@@ -1,6 +1,7 @@
-package com.stack_java.bookclub.models;
+package com.projectmanager.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,16 +10,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
-@Table(name="books")
-public class Book {
-	
+@Table(name = "projects")
+public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,21 +35,34 @@ public class Book {
 	@NotEmpty(message = "Title is required")
 	private String title;
 	
-	@NotEmpty(message = "Author is required")
-	private String author;
+	@Size(min = 3, message = "description must be 3 characters")
+	private String description;
 	
-	@NotEmpty(message = "Your thoughts are required")
-	private String thought;
+	@NotNull(message = "Date is required")
+	@Future(message = "Date must be in the future")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date date;
 	
-	@Column(updatable=false)
+	@Column(updatable = false)
 	private Date createdAt;
 	private Date updatedAt;
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
 	private User user;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="borrower_id")
-	private User borrower;
+	
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+			name = "teams",
+			joinColumns = @JoinColumn(name = "project_id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id")
+			)
+	private List<User> users;
+
+	@Column(updatable=false)
+	@OneToMany(mappedBy="project", fetch=FetchType.LAZY)
+	private List<Task> tasks;
 	
     @PrePersist
     protected void onCreate(){
@@ -51,7 +73,8 @@ public class Book {
         this.updatedAt = new Date();
     }
     
-    public Book() {}
+    public Project() {}
+    
     
     
 	public Long getId() {
@@ -66,17 +89,17 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getAuthor() {
-		return author;
+	public String getDescription() {
+		return description;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getThought() {
-		return thought;
+	public Date getDate() {
+		return date;
 	}
-	public void setThought(String thought) {
-		this.thought = thought;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -96,10 +119,16 @@ public class Book {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public User getBorrower() {
-		return borrower;
+	public List<User> getUsers() {
+		return users;
 	}
-	public void setBorrower(User borrower) {
-		this.borrower = borrower;
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	public List<Task> getTasks() {
+		return tasks;
+	}
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 }

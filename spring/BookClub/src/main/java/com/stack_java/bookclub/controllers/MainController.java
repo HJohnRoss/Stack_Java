@@ -98,11 +98,13 @@ public class MainController {
 	}
 
 	@PostMapping("/book/create/success")
-	public String createBook(@Valid @ModelAttribute("newBook") Book book, BindingResult result, HttpSession session) {
+	public String createBook(@Valid @ModelAttribute("newBook") Book book, BindingResult result, HttpSession session, Model model) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/";
 		}
 		if (result.hasErrors()) {
+			model.addAttribute("userId", session.getAttribute("userId"));
+			model.addAttribute("userName", session.getAttribute("userName"));
 			return "createBook.jsp";
 		}
 		bookService.createBook(book);

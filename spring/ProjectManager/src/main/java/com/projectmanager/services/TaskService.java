@@ -19,7 +19,8 @@ public class TaskService {
 	@Autowired
 	private ProjectRepository projectRepository;
 	
-	@Autowired UserRepository userRepository;
+	@Autowired 
+	private UserRepository userRepository;
 	
 	public void createTask(Task task, Long projectId, Object userId){
 		Project project = projectRepository.findById(projectId).get();

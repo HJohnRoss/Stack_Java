@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -152,27 +153,44 @@ public class MainController {
 	public String editProjectSuccess(@Valid @ModelAttribute("oneProject") Project project, BindingResult result, @PathVariable("id") Long id, HttpSession session, Model model) {
 		
 		if (!session.getAttribute("userId").equals(projectService.getOne(id).getUser().getId())) {
-			return "redirect:/";
+			return "redirect:/dashboard";
 		}
 		
 		if (result.hasErrors()) {
 			model.addAttribute("oneProject", project);
 			return "editProject.jsp";
 		}
+		projectService.save(project);
 		return "redirect:/project/show/{id}";
+	}
+//	delete a product and the tasks for that product
+	@DeleteMapping("/project/delete/{id}")
+	public String deleteProject(@Valid @ModelAttribute("oneProject") Project project, BindingResult result, @PathVariable("id") Long id, HttpSession session, Model model) {
+		
+		if (!session.getAttribute("userId").equals(projectService.getOne(id).getUser().getId())) {
+			return "redirect:/dashboard";
+		}
+//		doesnt work because of null pointer exception.
+//		for(Task oneTask : project.getTasks()) {
+		for(Task oneTask : projectService.projectTasks(id)) {
+			projectService.deleteTask(oneTask);
+		}
+		
+		projectService.deleteProject(project);
+		return "redirect:/dashboard";
 	}
 	
 //	=============================== BLACK BELT ===============================
-	@GetMapping("/team/join/{id}")
+	@PutMapping("/team/join/{id}")
 	public String joinTeam(@PathVariable("id") Long projectId, Model model, HttpSession session) {
 		
-//		if(session.getAttribute("userId") == null) return "redirect:/";
+		if(session.getAttribute("userId") == null) return "redirect:/";
 		
 		userService.joinTeam(projectId, session.getAttribute("userId"));
 		return "redirect:/dashboard";
 	}
-	
-	@GetMapping("/team/leave/{id}")
+
+	@PutMapping("/team/leave/{id}")
 	public String leaveTeam(@PathVariable("id") Long projectId, Model model, HttpSession session) {
 		
 		if(session.getAttribute("userId") == null) return "redirect:/";
@@ -180,7 +198,7 @@ public class MainController {
 		userService.leaveTeam(projectId, session.getAttribute("userId"));
 		return "redirect:/dashboard";
 	}
-	
+
 //	=============================== TASKS ===============================
 	@GetMapping("/project/{id}/tasks")
 	public String tasks(@PathVariable("id") Long projectId, Model model, HttpSession session) {
@@ -191,7 +209,7 @@ public class MainController {
 		model.addAttribute("task", new Task());
 		return "tasks.jsp";
 	}
-	
+//	if your not creating dont use {id}
 	@PostMapping("/project/{projectId}/tasks/success")
 	public String createTask(@Valid @ModelAttribute("task") Task task, BindingResult result, @PathVariable("projectId") Long projectId, HttpSession session, Model model) {
 		
@@ -202,8 +220,7 @@ public class MainController {
 			model.addAttribute("task", task);
 			return "tasks.jsp";
 		}
-		Task newTask = new Task(task.getName()); // why do i need this
-		taskService.createTask(newTask, projectId, session.getAttribute("userId"));
-		return "redirect:/project/{id}/tasks";
+		taskService.createTask(task, projectId, session.getAttribute("userId"));
+		return "redirect:/project/{projectId}/tasks";
 	}
 }

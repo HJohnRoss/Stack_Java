@@ -19,27 +19,31 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Edit Project</h1>
-		<a href="/dashboard">dashboard</a>
+				<h1>Create a Sighting</h1>
+			<a href="/dashboard">Dashboard</a>
+			<a href="/logout">logout</a>
 		
-		<form:form action="/project/edit/${oneProject.id }/success" method="post" modelAttribute="oneProject">
-			<input type="hidden" name="_method" value="put"/>
-			<form:input type="hidden" path="user"></form:input>
-			<form:input type="hidden" path="users"></form:input>
-			<form:errors path="title" class="text-danger"></form:errors>
+		<form:form action="/sighting/create/success" method="post" modelAttribute="sighting">
+			<input type="hidden" name="user" value="${userId }"/>
+			<form:errors path="location" class="text-danger"></form:errors>
 			<div>
-				<form:label path="title">Title:</form:label>
-				<form:input path="title" type="text"></form:input>
+				<form:label path="location">Location:</form:label>
+				<form:input path="location" type="text"></form:input>
 			</div>
-			<form:errors path="description" class="text-danger"></form:errors>
+			<form:errors path="what" class="text-danger"></form:errors>
 			<div>
-				<form:label path="description">Description:</form:label>
-				<form:input path="description" type="text"></form:input>
+				<form:label path="what">What Happened?:</form:label>
+				<form:input path="what" type="text"></form:input>
 			</div>
 			<form:errors path="date" class="text-danger"></form:errors>
 			<div>
 				<form:label path="date">Date:</form:label>
 				<form:input path="date" type="date"></form:input>
+			</div>
+			<form:errors path="num" class="text-danger"></form:errors>
+			<div>
+				<form:label path="num"># of Sasquatches:</form:label>
+				<form:input path="num" type="number"></form:input>
 			</div>
 			<button class="btn btn-success">Submit</button>
 		</form:form>

@@ -22,7 +22,11 @@
 <body>
 	<div class="container">
 		<div class="d-flex gap-5">
-			<h1>Welcome, <c:out value="${userName }"></c:out>!</h1>
+			<h1>
+				Welcome,
+				<c:out value="${userName }"></c:out>
+				!
+			</h1>
 			<a href="/logout">log out</a>
 		</div>
 		<div class="d-flex justify-content-between">
@@ -44,7 +48,12 @@
 						<td><c:out value="${oneProject.user.firstName }"></c:out></td>
 						<td><fmt:formatDate value="${oneProject.date}"
 								pattern="MMMM dd" /></td>
-						<td><a href="/team/join/${oneProject.id }">join team</a></td>
+						<td>
+							<form action="/team/join/${oneProject.id }" method="post">
+								<input type="hidden" name="_method" value="put"/>
+								<button class="btn btn-success">Join team</button>
+							</form>
+						</td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -64,17 +73,27 @@
 					<td><c:out value="${oneProject.user.firstName }"></c:out></td>
 					<td><fmt:formatDate value="${oneProject.date}"
 							pattern="MMMM dd" /></td>
-					<td><a href="/project/edit/${oneProject.id}">edit</a></td>
+					<td><a href="/project/edit/${oneProject.id}">edit</a>
+						<form action="/project/delete/${oneProject.id }" method="post">
+							<input type="hidden" name="_method" value="delete"/>
+							<button class="btn btn-danger">Delete</button>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
-			<c:forEach var="oneProject" items="${assignedProjects }">
+			<c:forEach var="oneProject" items="${oneUser.teams }">
 				<tr>
 					<td><a href="/project/show/${oneProject.id }"><c:out
 								value="${oneProject.title }"></c:out></a></td>
 					<td><c:out value="${oneProject.user.firstName }"></c:out></td>
 					<td><fmt:formatDate value="${oneProject.date}"
 							pattern="MMMM dd" /></td>
-					<td><a href="/team/leave/${oneProject.id}">Leave Team</a></td>
+					<td>
+						<form action="/team/leave/${oneProject.id}" method="post">
+							<input type="hidden" name="_method" value="put"/>
+							<button class="btn btn-warning">Leave Team</button>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

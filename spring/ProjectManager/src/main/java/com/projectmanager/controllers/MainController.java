@@ -92,7 +92,7 @@ public class MainController {
 		model.addAttribute("oneUser", userService.getOne(session.getAttribute("userId")));
 //		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BLACK BELT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		model.addAttribute("unassignedProjects", projectService.getUnassignedUsers(user));
-		model.addAttribute("assignedProjects", projectService.getAssignedUsers(user));
+//		model.addAttribute("assignedProjects", projectService.getAssignedUsers(user));
 		return "dashboard.jsp";
 	}
 	
